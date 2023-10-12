@@ -1,7 +1,7 @@
 using Unity.Netcode;
 using UnityEngine;
 
-namespace HelloWorld
+namespace HelloWorld.Core
 {
     public class HelloWorldManager : MonoBehaviour
     {
