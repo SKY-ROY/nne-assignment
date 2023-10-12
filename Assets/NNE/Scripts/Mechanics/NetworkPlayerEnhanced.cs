@@ -32,7 +32,11 @@ public class NetworkPlayerEnhanced : NetworkBehaviour
 
             SubmitPosRotRequestServerRpc(localPos, localRot);
 
-            firstPersonController.InteractionHandler();
+            localPos = Vector3.zero;
+            localRot = Vector3.zero;
+
+            if (firstPersonController.InteractionHandler(ref localPos, ref localRot))
+                AlignDataCubeRequestServerRpc(localPos, localRot);
         }
     }
 
@@ -63,6 +67,6 @@ public class NetworkPlayerEnhanced : NetworkBehaviour
         if (IsLocalPlayer)
             return;
 
-        // firstPersonController.
+        firstPersonController.SimulateDataCubeOrientation(resPos, resRot);
     }
 }

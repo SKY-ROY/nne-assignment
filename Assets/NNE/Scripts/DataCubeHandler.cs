@@ -45,20 +45,33 @@ public class DataCubeHandler : MonoBehaviour
         }
     }
 
-    public void UpdateOrientation(CodeColor color, Transform alignmentObjectTransform)
+    public void UpdateOrientation(CodeColor color, Transform alignmentObjectTransform, ref Vector3 resPos, ref Vector3 resRot)
     {
 
         // Rotational Alignment
         GameObject ObjectToOverlap = bindingMap[color].ObjectToAlign;
 
         Quaternion worldRotationDiff = alignmentObjectTransform.rotation * Quaternion.Inverse(bindingMap[color].ObjectToAlign.transform.rotation);
-        transform.rotation = worldRotationDiff * transform.rotation;
+        Quaternion finalRot = worldRotationDiff * transform.rotation;
+
+        transform.rotation = finalRot;
+
+        resRot = finalRot.eulerAngles;
 
         // Positional Alignment
         Vector3 positionDiff = alignmentObjectTransform.position - bindingMap[color].ObjectToAlign.transform.position;
+        Vector3 finalPos = transform.position + positionDiff;
 
-        transform.position += positionDiff;
+        transform.position = finalPos;
 
-        Debug.Log("----");
+        resPos = finalPos;
+
+        // Debug.Log("----");
+    }
+
+    public void SimulateOrientation(Vector3 pos, Vector3 rot)
+    {
+        transform.rotation = Quaternion.Euler(rot);
+        transform.position = pos;
     }
 }

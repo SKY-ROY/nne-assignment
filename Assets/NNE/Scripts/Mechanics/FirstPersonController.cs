@@ -71,22 +71,22 @@ public class FirstPersonController : MonoBehaviour
     #endregion
 
     #region Player Interaction
-    public void InteractionHandler()
+    public bool InteractionHandler(ref Vector3 pos, ref Vector3 rot)
     {
         if (Input.GetMouseButtonDown(0))
         {
             RaycastHit hit;
             if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, Mathf.Infinity))
             {
-                HandleRaycastHit(hit);
-                // Debug.DrawRay(pointerObject.transform.position, hit.point - playerCamera.transform.position, Color.green, 0.25f);
+                return HandleRaycastHit(hit, ref pos, ref rot);
             }
         }
+        return false;
     }
-    private void HandleRaycastHit(RaycastHit hit)
+    private bool HandleRaycastHit(RaycastHit hit, ref Vector3 resPos, ref Vector3 resRot)
     {
         if (hit.collider.gameObject == null)
-            return;
+            return false;
 
         GameObject hitObject = hit.collider.gameObject;
         Debug.Log("Hit object: " + hitObject.name);
@@ -94,7 +94,13 @@ public class FirstPersonController : MonoBehaviour
         QRCodeHandler codeHandler = hitObject.GetComponent<QRCodeHandler>();
 
         // Debug.Log($"{codeHandler.Color} -> pos: {hitObject.transform.position}, rot-> {hitObject.transform.rotation.eulerAngles}");
-        DataCubeHandler.Instance.UpdateOrientation(codeHandler.Color, hitObject.transform);
+        DataCubeHandler.Instance.UpdateOrientation(codeHandler.Color, hitObject.transform, ref resPos, ref resRot);
+        return true;
+    }
+
+    public void SimulateDataCubeOrientation(Vector3 pos, Vector3 rot)
+    {
+        DataCubeHandler.Instance.SimulateOrientation(pos, rot);
     }
     #endregion
 }
