@@ -4,11 +4,8 @@ using Unity.Netcode;
 using UnityEditor;
 using UnityEngine;
 
-public class NetworkPlayerEnhanced : NetworkBehaviour
+public class NetworkPlayer : NetworkBehaviour
 {
-    // public NetworkVariable<Vector3> Position = new NetworkVariable<Vector3>();
-    // public NetworkVariable<Vector3> Rotation = new NetworkVariable<Vector3>();
-
     private FirstPersonController firstPersonController;
 
     public override void OnNetworkSpawn()

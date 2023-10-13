@@ -91,11 +91,21 @@ public class FirstPersonController : MonoBehaviour
         GameObject hitObject = hit.collider.gameObject;
         Debug.Log("Hit object: " + hitObject.name);
 
-        QRCodeHandler codeHandler = hitObject.GetComponent<QRCodeHandler>();
+        if (hitObject.GetComponent<QRCodeHandler>() != null)
+        {
+            QRCodeHandler codeHandler = hitObject.GetComponent<QRCodeHandler>();
 
-        // Debug.Log($"{codeHandler.Color} -> pos: {hitObject.transform.position}, rot-> {hitObject.transform.rotation.eulerAngles}");
-        DataCubeHandler.Instance.UpdateOrientation(codeHandler.Color, hitObject.transform, ref resPos, ref resRot);
-        return true;
+            DataCubeHandler.Instance.UpdateOrientation(codeHandler.Color, hitObject.transform, ref resPos, ref resRot);
+            return true;
+        }
+
+        if (hitObject.GetComponent<DataPointHandler>() != null)
+        {
+            DataPointHandler dataPointHandler = hitObject.GetComponent<DataPointHandler>();
+
+            DataCubeHandler.Instance.ReflectMetaDataAsync(dataPointHandler.Color);
+        }
+        return false;
     }
 
     public void SimulateDataCubeOrientation(Vector3 pos, Vector3 rot)

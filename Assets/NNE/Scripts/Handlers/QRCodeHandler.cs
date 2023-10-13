@@ -4,10 +4,11 @@ using UnityEngine;
 
 public enum CodeColor
 {
-    Red,    // 90,0,0
-    Green,  // 0,90,0
-    Blue,   // -90,0,0
-    Black  // 0,-90,0
+    Red,
+    Green,
+    Blue,
+    Black,
+    Yellow
 }
 
 

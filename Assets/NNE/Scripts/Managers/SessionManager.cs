@@ -22,9 +22,12 @@ public class SessionManager : MonoBehaviour
 
     static void StartButtons()
     {
-        if (GUILayout.Button("Host", GUILayout.Width(100), GUILayout.Height(50))) NetworkManager.Singleton.StartHost();
-        if (GUILayout.Button("Client", GUILayout.Width(100), GUILayout.Height(50))) NetworkManager.Singleton.StartClient();
-        if (GUILayout.Button("Server", GUILayout.Width(100), GUILayout.Height(50))) NetworkManager.Singleton.StartServer();
+        if (GUILayout.Button("Host", GUILayout.Width(100), GUILayout.Height(50)))
+            NetworkManager.Singleton.StartHost();
+        if (GUILayout.Button("Client", GUILayout.Width(100), GUILayout.Height(50)))
+            NetworkManager.Singleton.StartClient();
+        // if (GUILayout.Button("Server", GUILayout.Width(100), GUILayout.Height(50)))
+        // NetworkManager.Singleton.StartServer();
     }
 
     static void StatusLabels()
