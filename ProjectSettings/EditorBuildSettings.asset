@@ -8,7 +8,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/NNE/Scenes/TestScene.unity
     guid: aea11a076388cb84783c3a35edbcfe27
-  - enabled: 1
-    path: Assets/HelloWorldExample/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
   m_configObjects: {}
